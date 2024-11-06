@@ -103,8 +103,8 @@ const contractAddressArbitrum = "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"; //
 
 
 
-// NOVART contract address
-const contractAddressNovart = "0x03cF969581AEdEA742506631188130d84e147806"; // NOVART on Polygon
+// OPW contract address
+const contractAddressOPW = "0xcF3Ad9031729B5E131582138edE799F08F52299D"; // OPW on Polygon
 
 
 /*
@@ -200,11 +200,11 @@ export default function Index({ params }: any) {
 
 
 
-  // NOVART contract
-  const contractNovart = getContract({
+  // OPW contract
+  const contractOPW = getContract({
     client,
     chain: polygon,
-    address: contractAddressNovart,
+    address: contractAddressOPW,
   });
 
 
@@ -414,28 +414,28 @@ export default function Index({ params }: any) {
   } , [address, contract]);
 
 
-  // NOVART balance
-  const [novartBalance, setNovartBalance] = useState(0);
+  // OPW balance
+  const [opwBalance, setOPWBalance] = useState(0);
   useEffect(() => {
       
       if (!address) return;
       // get the balance
 
-      if (!contractNovart) {
+      if (!contractOPW) {
         return;
       }
 
-      const getNovartBalance = async () => {
+      const getBalance = async () => {
 
         try {
           const result = await balanceOf({
-            contract: contractNovart,
+            contract: contractOPW,
             address: address,
           });
       
           //console.log(result);
       
-          setNovartBalance( Number(result) / 10 ** 18 );
+          setOPWBalance( Number(result) / 10 ** 18 );
   
         } catch (error) {
           console.error("Error getting balance", error);
@@ -443,18 +443,18 @@ export default function Index({ params }: any) {
 
       };
 
-      if (address) getNovartBalance();
+      if (address) getBalance();
 
       // get the balance in the interval
 
       const interval = setInterval(() => {
-        if (address) getNovartBalance();
+        if (address) getBalance();
       }, 1000);
 
 
       return () => clearInterval(interval);
 
-  } , [address, contractNovart]);
+  } , [address, contractOPW]);
 
   
 
@@ -1596,7 +1596,7 @@ export default function Index({ params }: any) {
 
 
 
-              {/* NOVART balance */}
+              {/* OPW balance */}
               <div className="mt-4 flex flex-row gap-2 justify-between items-center p-2
                 bg-yellow-500 text-white rounded-lg text-center
                 hover:shadow-lg
@@ -1604,24 +1604,24 @@ export default function Index({ params }: any) {
                 transform hover:-translate-y-1
               ">
                 <Image
-                  src="/logo-novart.png"
-                  alt="NOVART"
+                  src="/logo-opw.png"
+                  alt="opw"
                   width={35}
                   height={35}
                   className="rounded-lg w-8 h-8 xl:w-10 xl:h-10"
                 />
 
                 <div className="text-4xl font-semibold text-zinc-100">
-                  {Number(novartBalance).toFixed(2)}
+                  {Number(opwBalance).toFixed(2)}
                 </div>
                 <p className="w-12 text-sm text-zinc-100">
-                  NOVART
+                  OPW
                 </p>
 
                 <button
                   onClick={() => {
                     router.push(
-                      "/" + params.lang + "/" + params.chain + "/send-token/?wallet=" + wallet + "&token=NOVART"
+                      "/" + params.lang + "/" + params.chain + "/send-token/?wallet=" + wallet + "&token=OPW"
                     );
 
                   }}
@@ -2051,14 +2051,14 @@ function Header() {
         >
           <div className="flex flex-row gap-2 items-center">
             <Image
-              src="/logo-nova.png"
+              src="/logo-opw.png"
               alt="Circle Logo"
               width={35}
               height={35}
               className="rounded-full w-10 h-10 xl:w-14 xl:h-14"
             />
             <span className="text-lg xl:text-3xl text-zinc-100 font-semibold">
-              NOVA Wallet
+              OLGA Wallet
             </span>
           </div>
         </button>

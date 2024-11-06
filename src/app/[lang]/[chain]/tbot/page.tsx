@@ -2155,14 +2155,14 @@ function Header() {
             >            
                 <div className="flex flex-row gap-2 items-center">
                     <Image
-                    src="/logo-nova.png"
+                    src="/logo-opw.png"
                     alt="Circle Logo"
                     width={35}
                     height={35}
                     className="rounded-full w-10 h-10 xl:w-14 xl:h-14"
                     />
                     <span className="text-lg xl:text-3xl text-gray-800 font-semibold">
-                    NOVA
+                    OLGA
                     </span>
                 </div>
             </button>

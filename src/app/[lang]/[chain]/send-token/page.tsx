@@ -126,9 +126,9 @@ export default function SendUsdt({ params }: any) {
     if (token === "USDT") {
       setContractAddress("0xc2132D05D31c914a87C6611C10748AEb04B58e8F"); // USDT on Polygon
       setContractAddressArbitrum("0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"); // USDT on Arbitrum
-    } else if (token === "NOVART") {
-      setContractAddress("0x03cF969581AEdEA742506631188130d84e147806"); // NOVART on Polygon
-      setContractAddressArbitrum("0x03cF969581AEdEA742506631188130d84e147806"); // NOVART on Arbitrum
+    } else if (token === "OPW") {
+      setContractAddress("0xcF3Ad9031729B5E131582138edE799F08F52299D"); // OPW on Polygon
+      setContractAddressArbitrum("0xcF3Ad9031729B5E131582138edE799F08F52299D"); // OPW on Arbitrum
     }
   } , [token]);
 
@@ -289,7 +289,7 @@ export default function SendUsdt({ params }: any) {
         if (!result) return;
         if (token === "USDT") {
           setBalance(Number(result) / 10 ** 6);
-        } else if (token === "NOVART") {
+        } else if (token === "OPW") {
           setBalance(Number(result) / 10 ** 18);
         }
 
@@ -1753,14 +1753,14 @@ function Header() {
         >
           <div className="flex flex-row gap-2 items-center">
             <Image
-              src="/logo-nova.png"
+              src="/logo-opw.png"
               alt="Circle Logo"
               width={35}
               height={35}
               className="rounded-full w-10 h-10 xl:w-14 xl:h-14"
             />
             <span className="text-lg xl:text-3xl text-zinc-100 font-semibold">
-              NOVA Wallet
+              OLGA Wallet
             </span>
           </div>
         </button>
