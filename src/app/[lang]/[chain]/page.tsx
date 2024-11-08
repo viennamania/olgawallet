@@ -82,7 +82,41 @@ import { useQRCode } from 'next-qrcode';
 
 
 
+interface SellOrder {
+  _id: string;
+  createdAt: string;
+  nickname: string;
+  trades: number;
+  price: number;
+  available: number;
+  limit: string;
+  paymentMethods: string[];
 
+  usdtAmount: number;
+  krwAmount: number;
+  rate: number;
+
+  walletAddress: string;
+
+  seller: any;
+
+  status: string;
+
+  acceptedAt: string;
+
+  paymentRequestedAt: string;
+
+  cancelledAt: string;
+
+  paymentConfirmedAt: string;
+  escrowTransactionHash: string;
+
+  tradeId: string;
+
+  buyer: any;
+
+  privateSale: boolean;
+}
 
 
 
@@ -91,7 +125,7 @@ import { useQRCode } from 'next-qrcode';
 const wallets = [
   inAppWallet({
     auth: {
-      options: ["phone"],
+      options: ["phone", "email"],
     },
   }),
 ];
@@ -920,6 +954,68 @@ export default function Index({ params }: any) {
 
   , [tronBalance, balance, params.chain]);
       
+
+
+
+
+
+
+    
+  const [sellOrders, setSellOrders] = useState<SellOrder[]>([]);
+  const [loadingFetchSellOrders, setLoadingFetchSellOrders] = useState(false);
+  useEffect(() => {
+
+    const fetchSellOrders = async () => {
+
+
+
+      setLoadingFetchSellOrders(true);
+
+      // api call
+      const response = await fetch('/api/order/getAllSellOrders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          lang: params.lang,
+          chain: params.chain,
+          ///walletAddress: address,
+          //searchMyOrders: searchMyOrders
+        })
+      });
+
+      const data = await response.json();
+
+      
+      //console.log('data', data);
+
+
+
+      if (data.result) {
+        setSellOrders(data.result.orders);
+      }
+
+      setLoadingFetchSellOrders(false);
+
+    };
+      
+
+
+    fetchSellOrders();
+
+    // fetch sell orders every 10 seconds
+    
+    const interval = setInterval(() => {
+      fetchSellOrders();
+    }, 3000);
+
+    return () => clearInterval(interval);
+    
+
+  }, [params.lang, params.chain]);
+
+
 
 
 
