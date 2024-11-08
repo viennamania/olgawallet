@@ -251,6 +251,9 @@ export default function Index({ params }: any) {
     Copy_Wallet_Address: "",
     Copied_Wallet_Address: "",
 
+    Connect_Wallet: "",
+    Disconnect_Wallet: "",
+
   } );
 
   useEffect(() => {
@@ -294,6 +297,9 @@ export default function Index({ params }: any) {
     Copy_Wallet_Address,
     Copied_Wallet_Address,
 
+    Connect_Wallet,
+    Disconnect_Wallet,
+
   } = data;
 
 
@@ -320,7 +326,8 @@ export default function Index({ params }: any) {
 
 
   // get the active wallet
-  //const activeWallet = useActiveWallet();
+  const activeWallet = useActiveWallet();
+
 
 
 
@@ -1129,8 +1136,8 @@ export default function Index({ params }: any) {
 
         )}
 
-        {/*address && (
-          <div className="mt-0 w-full flex items-start justify-start gap-5">
+        {address && (
+          <div className="mt-0 w-full flex items-center justify-start gap-5">
             <Image
               src="/icon-wallet-live.gif"
               alt="Wallet"
@@ -1138,10 +1145,20 @@ export default function Index({ params }: any) {
               height={25}
               className="rounded"
             />
+            <div className="flex flex-col gap-2">
+              {/* disconnect button */}
+              <button
+                onClick={() => {
+                  activeWallet?.disconnect();
+                }}
+                className="bg-zinc-800 text-white p-2 rounded-lg"
+              >
+                {Disconnect_Wallet}
+              </button>
+            </div>
 
           </div>
-        )*/}
-            
+        )}
 
 
         <div className="mt-2 w-full flex flex-col xl:flex-row items-center xl:items-stretch justify-center gap-5 mb-10">

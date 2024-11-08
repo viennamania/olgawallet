@@ -23,6 +23,7 @@ import {
 
   useActiveAccount,
 
+  useDisconnect,
   
   
 } from "thirdweb/react";
