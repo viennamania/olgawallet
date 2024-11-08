@@ -77,6 +77,9 @@
     "Buy_USDT": "Buy USDT",
     "Sell_USDT": "Sell USDT",
 
+    "Accept_Buy_Order": "Accept Buy Order",
+    "Apply_Buy_Order": "Apply Buy Order",
+
     "Send_USDT": "Send USDT",
     "Pay_USDT": "Pay USDT",
 
@@ -394,7 +397,10 @@
 
 
     "Apply_for_Listing_New_Token": "Apply for Listing New Token",
-    "Apply_for_Listing_New_Seller": "Apply for Listing New Seller"
+    "Apply_for_Listing_New_Seller": "Apply for Listing New Seller",
+    
+    "Copy_Wallet_Address": "Copy Wallet Address"
+
 
 
 }

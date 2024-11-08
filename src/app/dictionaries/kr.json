@@ -52,6 +52,10 @@
     "Buy_USDT": "USDT 구매하기",
     "Sell_USDT": "USDT 판매하기",
 
+    "Accept_Buy_Order": "구매신청수락하기",
+    "Apply_Buy_Order": "구매신청하기",
+
+
     "Send_USDT": "USDT 보내기",
     "Pay_USDT": "USDT 지불하기",
 
@@ -341,6 +345,9 @@
     "Copied_Wallet_Address": "지갑 주소가 복사되었습니다.",
 
     "Apply_for_Listing_New_Token": "신규 토큰 상장 신청하기",
-    "Apply_for_Listing_New_Seller": "신규 판매자 등록 신청하기"
+    "Apply_for_Listing_New_Seller": "신규 판매자 등록 신청하기",
+
+    "Copy_Wallet_Address": "지갑 주소 복사하기"
+
 
 }

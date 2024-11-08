@@ -1121,6 +1121,10 @@ export default function Index({ params }: any) {
 
               // custom
 
+              locale={"en_US"}
+              
+
+
               
             />
 
