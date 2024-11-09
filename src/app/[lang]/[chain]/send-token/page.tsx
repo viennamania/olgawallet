@@ -208,6 +208,10 @@ export default function SendUsdt({ params }: any) {
 
     My_Wallet_Address: "",
 
+    Are_you_sure_you_want_to_send_token: "",
+
+    Send: "",
+
   } );
 
   useEffect(() => {
@@ -255,6 +259,10 @@ export default function SendUsdt({ params }: any) {
     Anonymous,
 
     My_Wallet_Address,
+
+    Are_you_sure_you_want_to_send_token,
+
+    Send,
 
   } = data;
 
@@ -410,46 +418,6 @@ export default function SendUsdt({ params }: any) {
 
   }, [address]);
 
-
-  
-  const [tronWalletAddress, setTronWalletAddress] = useState('');
-  useEffect(() => {
-      
-    if (address && params.chain === "tron") {
-
-      // get tron wallet address
-      const getTronWalletAddress = async () => {
-
-        const response = await fetch('/api/tron/getTronWalletAddress', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            lang: params.lang,
-            chain: params.chain,
-            walletAddress: address,
-          }),
-        });
-
-        if (!response) return;
-
-        const data = await response.json();
-
-        setTronWalletAddress(data.result.tronWalletAddress);
-
-      };
-
-      getTronWalletAddress();
-
-    }
-
-  } , [address, params.chain, params.lang]);
-
-
-  console.log("tronWalletAddress", tronWalletAddress);
-
-  
 
 
 
@@ -667,96 +635,6 @@ export default function SendUsdt({ params }: any) {
 
       if (params.chain === "tron") {
 
-        const tronWeb = new TronWeb({
-          fullHost: 'https://api.trongrid.io',
-          
-          headers: {
-
-            //'TRON-PRO-API-KEY': process.env.TRONGRID_API_KEY,
-
-            'TRON-PRO-API-KEY': '429a03b7-ef22-4723-867e-5dcfeef6f787',
-
-          },
-
-          ///privateKey: user.tronWalletPrivateKey,
-            
-        });
-
-        tronWeb.setPrivateKey(user.tronWalletPrivateKey);
-
-
-        // send TRC20 USDT
-        const contract = await tronWeb.contract().at(contractAddressTron);
-
-        // fee_limit
-        // out of energy error occurs when the fee_limit is too low
-        // send TRC20 USDT
-        // tronWeb.transactionBuilder
-
-
-
-        const result = await contract.transfer(
-          recipient.tronWalletAddress,
-          //amount * 10 ** 6
-          TronWeb.toSun(amount)
-        ).send();
-
-        /*
-        ).send({
-
-          feeLimit: 100000000,
-          callValue: 0,
-          shouldPollResponse: true,
-
-        });
-        */
-
-        ///const result = await contract.transfer(recipient.tronWalletAddress, amount * 10 ** 6).send();
-
-
-
-
-        console.log("result", result);
-
-
-        if (result) {
-          toast.success(USDT_sent_successfully);
-
-          setAmount(0); // reset amount
-
-          // refresh usdt balance
-
-          const response = await fetch('/api/tron/getUsdtBalance', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              lang: params.lang,
-              chain: params.chain,
-              tronWalletAddress: tronWalletAddress,
-            }),
-          });
-
-          if (!response) return;
-
-          const data = await response.json();
-
-          setUsdtBalance(data.result?.usdtBalance);
-
-
-
-
-
-        } else {
-          toast.error(Failed_to_send_USDT);
-        }
-
-
-
-
-
-
 
 
 
@@ -863,40 +741,46 @@ export default function SendUsdt({ params }: any) {
       return;
     }
 
-    setSending(true);
+    if (confirm(Are_you_sure_you_want_to_send_token)) {
 
-    try {
-      // Call the extension function to prepare the transaction
-      const transaction = transfer({
-        contract,
-        to: recipient.walletAddress,
-        amount: amount,
-      });
+      setSending(true);
 
-      const { transactionHash } = await sendTransaction({
-        account: activeAccount as any,
-        transaction,
-      });
-
-      if (transactionHash) {
-        toast.success('Token sent successfully');
-        setAmount(0); // reset amount
-
-        // refresh balance
-        const result = await balanceOf({
+      try {
+        // Call the extension function to prepare the transaction
+        const transaction = transfer({
           contract,
-          address: address || "",
+          to: recipient.walletAddress,
+          amount: amount,
         });
-        setBalance(Number(result) / 10 ** 6);
-      } else {
+
+        const { transactionHash } = await sendTransaction({
+          account: activeAccount as any,
+          transaction,
+        });
+
+        if (transactionHash) {
+          toast.success('Token sent successfully');
+          setAmount(0); // reset amount
+
+          // refresh balance
+          const result = await balanceOf({
+            contract,
+            address: address || "",
+          });
+          setBalance(Number(result) / 10 ** 6);
+        } else {
+          toast.error('Failed to send token');
+        }
+      } catch (error) {
+        console.error(error);
         toast.error('Failed to send token');
       }
-    } catch (error) {
-      console.error(error);
-      toast.error('Failed to send token');
+
+      setSending(false);
+
+
     }
 
-    setSending(false);
   };
 
 
@@ -1116,7 +1000,7 @@ export default function SendUsdt({ params }: any) {
               </div>
 
               <div className="text-2xl font-semibold">
-                {token} 보내기
+                {token} {Send}
               </div>
 
             </div>
@@ -1547,7 +1431,7 @@ export default function SendUsdt({ params }: any) {
               </div>
 
               {/* otp verification */}
-
+              {/*
               {verifiedOtp ? (
                 <div className="w-full flex flex-row gap-2 items-center justify-center">
                   <Image
@@ -1612,6 +1496,7 @@ export default function SendUsdt({ params }: any) {
                 </div>
 
               )}
+              */}
 
               
 
@@ -1623,8 +1508,6 @@ export default function SendUsdt({ params }: any) {
 
                 disabled={!address || !recipient?.walletAddress || !amount || sending || !verifiedOtp}
 
-                
-                //onClick={sendUsdt}
                 onClick={sendToken}
 
                 className={`mt-10 w-full p-2 rounded-lg text-xl font-semibold
@@ -1637,7 +1520,7 @@ export default function SendUsdt({ params }: any) {
                    
                    `}
               >
-                  {token} 보내기
+                  {token} {Send}
               </button>
 
               <div className="w-full flex flex-row gap-2 text-xl font-semibold">

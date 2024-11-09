@@ -9,7 +9,7 @@ import thirdwebIcon from "@public/thirdweb.svg";
 
 import { client } from "../../client";
 
-import { createThirdwebClient } from "thirdweb";
+////import { createThirdwebClient } from "thirdweb";
 
 import {
   //ThirdwebProvider,
@@ -824,136 +824,8 @@ export default function Index({ params }: any) {
 
 
 
-  // if chain is tron, then get tron wallet address
-
-  //console.log("params.chain", params.chain);
-
-  const [tronWalletAddress, setTronWalletAddress] = useState('');
-  useEffect(() => {
-      
-      if (address && params.chain === "tron") {
-  
-        // get tron wallet address
-        const getTronWalletAddress = async () => {
-  
-          const response = await fetch('/api/tron/getTronWalletAddress', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              lang: params.lang,
-              chain: params.chain,
-              walletAddress: address,
-            }),
-          });
-  
-          const data = await response.json();
-  
-          setTronWalletAddress(data?.result?.tronWalletAddress);
-  
-        };
-  
-        getTronWalletAddress();
-  
-      }
-  
-    } , [address, params.chain, params.lang]);
-
-
-  console.log("tronWalletAddress", tronWalletAddress);
-
 
   console.log("address", address);
-
-  // getTronBalance
-  const [tronBalance, setTronBalance] = useState(0);
-  useEffect(() => {
-    if (tronWalletAddress && params.chain === "tron") {
-      const getTronBalance = async () => {
-        const response = await fetch('/api/tron/getTronBalance', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            lang: params.lang,
-            chain: params.chain,
-            tronWalletAddress: tronWalletAddress,
-          }),
-        });
-
-        if (!response) return;
-
-        const data = await response.json();
-
-        setTronBalance(data.result.tronBalance);
-
-      };
-
-      getTronBalance();
-
-    }
-
-  } , [tronWalletAddress, params.chain, params.lang]);
-
-  console.log("tronBalance", tronBalance);
-
-
-  // usdt balance
-  const [usdtBalance, setUsdtBalance] = useState(0);
-  useEffect(() => {
-    if (tronWalletAddress && params.chain === "tron") {
-      const getUsdtBalance = async () => {
-        const response = await fetch('/api/tron/getUsdtBalance', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            lang: params.lang,
-            chain: params.chain,
-            tronWalletAddress: tronWalletAddress,
-          }),
-        });
-
-        if (!response) return;
-
-        const data = await response.json();
-
-        setUsdtBalance(data.result?.usdtBalance);
-
-      };
-
-      getUsdtBalance();
-
-    }
-
-  } , [tronWalletAddress, params.chain, params.lang]);
-
-  console.log("usdtBalance", usdtBalance);
-
-
-
-
-  // chainBalance
-  const [chainBalance, setChainBalance] = useState(0);
-  useEffect(() => {
-    if (params.chain === "tron") {
-      setChainBalance(tronBalance);
-    } else if (params.chain === "polygon") {
-      setChainBalance(balance);
-    } else if (params.chain === "arbitrum") {
-      setChainBalance(balance);
-    } else if (params.chain === "ethereum") {
-      setChainBalance(balance);
-    } else {
-      setChainBalance(0);
-    }
-  }
-
-  , [tronBalance, balance, params.chain]);
-      
 
 
 
@@ -1172,7 +1044,7 @@ export default function Index({ params }: any) {
         {!address && (
 
           
-          <div className="w-full flex flex-row justify-center items-center gap-2">
+          <div className="w-full flex flex-row justify-start items-center gap-2">
 
             {/*
             <button
@@ -1215,6 +1087,10 @@ export default function Index({ params }: any) {
                   size: "wide",                            
                   //title: "Connect",
 
+                }}
+
+                connectButton={{
+                  label: Connect_Wallet,
                 }}
 
                 appMetadata={
@@ -1785,7 +1661,7 @@ export default function Index({ params }: any) {
 
                   {/* floating point number to fixed 5 and text size small */}
                 <div className="text-4xl font-semibold text-zinc-100">
-                  {Number(usdtBalance).toFixed(2)}
+                  {Number(balance).toFixed(2)}
                 </div>
                 <p className="w-12 text-sm text-zinc-100">
                   USDT

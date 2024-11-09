@@ -71,6 +71,7 @@
     "User_wallet_address": "用户钱包地址",
     "This_address_is_not_white_listed": "此地址未列入白名单",
     "If_you_are_sure_please_click_the_send_button": "如果您确定，请点击发送按钮",
+    "Send": "发送",
     "Sending": "发送中",
     "Rate": "汇率",
     "Payment_Information": "支付信息",
@@ -228,7 +229,9 @@
     "Apply_for_Listing_New_Token": "申请上市新代币",
     "Apply_for_Listing_New_Seller": "申请上市新卖家",
 
-    "Copy_Wallet_Address": "复制钱包地址"
+    "Copy_Wallet_Address": "复制钱包地址",
+
+    "Are_you_sure_you_want_to_send_token": "您确定要发送代币吗？"
 
    
 }

@@ -110,6 +110,7 @@
 
     "If_you_are_sure_please_click_the_send_button": "If you are sure, please click the send button.",
 
+    "Send": "Send",
     "Sending": "Sending",
 
     "Rate": "Rate",
@@ -400,7 +401,9 @@
     "Apply_for_Listing_New_Token": "Apply for Listing New Token",
     "Apply_for_Listing_New_Seller": "Apply for Listing New Seller",
     
-    "Copy_Wallet_Address": "Copy Wallet Address"
+    "Copy_Wallet_Address": "Copy Wallet Address",
+
+    "Are_you_sure_you_want_to_send_token": "Are you sure you want to send token?"
 
 
 

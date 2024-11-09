@@ -86,6 +86,7 @@
 
     "If_you_are_sure_please_click_the_send_button": "확실하다면 전송 버튼을 클릭하세요.",
 
+    "Send": "전송",
     "Sending": "전송 중",
 
     "Rate": "환율",
@@ -348,7 +349,9 @@
     "Apply_for_Listing_New_Token": "신규 토큰 상장 신청하기",
     "Apply_for_Listing_New_Seller": "신규 판매자 등록 신청하기",
 
-    "Copy_Wallet_Address": "지갑 주소 복사하기"
+    "Copy_Wallet_Address": "지갑 주소 복사하기",
+
+    "Are_you_sure_you_want_to_send_token": "토큰을 전송하시겠습니까?"
 
 
 }
