@@ -31,7 +31,10 @@ import {
 import { inAppWallet } from "thirdweb/wallets";
 
 
-import { getUserPhoneNumber } from "thirdweb/wallets/in-app";
+import {
+    getUserPhoneNumber,
+    getUserEmail,
+} from "thirdweb/wallets/in-app";
 
 
 import Image from 'next/image';
@@ -158,6 +161,7 @@ export default function SettingsPage({ params }: any) {
 
         Cancel: "",
         Save: "",
+        Saving: "",
         Enter_your_nickname: "",
         Nickname_should_be_5_10_characters: "",
 
@@ -218,6 +222,7 @@ export default function SettingsPage({ params }: any) {
 
         Cancel,
         Save,
+        Saving,
         Enter_your_nickname,
         Nickname_should_be_5_10_characters,
 
@@ -256,6 +261,7 @@ export default function SettingsPage({ params }: any) {
  
 
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [emailAddress, setEmailAddress] = useState("");
 
     useEffect(() => {
   
@@ -270,6 +276,9 @@ export default function SettingsPage({ params }: any) {
           setPhoneNumber(phoneNumber || "");
         });
   
+        getUserEmail({ client }).then((emailAddress) => {
+          setEmailAddress(emailAddress || "");
+        });
   
   
       }
@@ -390,6 +399,7 @@ export default function SettingsPage({ params }: any) {
 
 
 
+    const [loadingSetUserUpdated, setLoadingSetUserUpdated] = useState(false);
 
     const setUserData = async () => {
 
@@ -408,6 +418,9 @@ export default function SettingsPage({ params }: any) {
             toast.error(Nickname_should_be_alphanumeric_lowercase);
             return;
         }
+
+        setLoadingSetUserUpdated(true);
+
 
         if (nicknameEdit) {
 
@@ -460,6 +473,7 @@ export default function SettingsPage({ params }: any) {
                     nickname: editedNickname,
 
                     mobile: phoneNumber,
+                    email: emailAddress,
                 }),
             });
 
@@ -483,8 +497,7 @@ export default function SettingsPage({ params }: any) {
         }
 
 
-        
-
+        setLoadingSetUserUpdated(false);
         
     }
 
@@ -617,6 +630,7 @@ export default function SettingsPage({ params }: any) {
           chain: params.chain,
           walletAddress: address,
           mobile: phoneNumber,
+          email: emailAddress,
         }),
       });
   
@@ -830,13 +844,16 @@ export default function SettingsPage({ params }: any) {
                                     </span>
                                 </div>
                                 <button
-                                    disabled={!address}
-                                    className="p-2 bg-blue-500 text-zinc-100 rounded"
+                                    disabled={!address || loadingSetUserUpdated}
+                                    className={`
+                                        ${!address || loadingSetUserUpdated ? 'bg-gray-300 text-gray-400' : 'bg-green-500 text-zinc-100'}
+                                        p-2 rounded-lg text-sm font-semibold
+                                    `}
                                     onClick={() => {
                                         setUserData();
                                     }}
                                 >
-                                    {Save}
+                                    {loadingSetUserUpdated ? Saving+'...' : Save}
                                 </button>
 
                                 
@@ -983,7 +1000,7 @@ export default function SettingsPage({ params }: any) {
                                     )}
 
                                     {applying ? (
-                                        <div className="p-2 bg-zinc-800 rounded text-zinc-100 text-xl font-semibold">
+                                        <div className="p-2 bg-gray-300 text-gray-400 rounded text-sm font-semibold">
                                             {Applying}...
                                         </div>
                                     ) : (
@@ -1212,7 +1229,7 @@ export default function SettingsPage({ params }: any) {
                                             } }
                                                 
                                         >
-                                            Save
+                                            {Save}
                                         </button>
                                     </div>
                                 )}

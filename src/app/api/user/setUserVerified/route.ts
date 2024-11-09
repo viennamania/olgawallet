@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
 
-  const { walletAddress, nickname, mobile } = body;
+  const { walletAddress, nickname, mobile, email } = body;
 
 
 
@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
     walletAddress: walletAddress,
     nickname: nickname,
     mobile: mobile,
+    email: email,
   });
 
 

@@ -951,8 +951,8 @@ export default function Index({ params }: any) {
                 中文(ZH)
               </option>
               <option
-                value="ja"
-                selected={params.lang === "ja"}
+                value="jp"
+                selected={params.lang === "jp"}
               >
                 日本語(JP)
               </option>

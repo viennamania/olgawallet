@@ -128,7 +128,7 @@ export async function insertOneVerified(data: any) {
 
   //console.log('insertOne data: ' + JSON.stringify(data));
 
-  if (!data.walletAddress || !data.nickname || !data.mobile) {
+  if (!data.walletAddress || !data.nickname) {
     return null;
   }
 
@@ -165,9 +165,11 @@ export async function insertOneVerified(data: any) {
 
     {
       id: id,
-      email: data.email,
       nickname: data.nickname,
+
       mobile: data.mobile,
+      email: data.email,
+
 
       walletAddress: data.walletAddress,
 
@@ -184,9 +186,10 @@ export async function insertOneVerified(data: any) {
   if (result) {
     return {
       id: id,
-      email: data.email,
+
       nickname: data.nickname,
       mobile: data.mobile,
+      email: data.email,
     };
   } else {
     return null;
