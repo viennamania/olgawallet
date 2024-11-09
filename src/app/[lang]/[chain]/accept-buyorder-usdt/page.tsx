@@ -1833,7 +1833,10 @@ export default function Index({ params }: any) {
 
           <AppBarComponent />
 
-          <Header />
+          <Header
+            lang={params.lang}
+            chain={params.chain}
+          />
 
           {/* store code number */}
           {/*
@@ -3914,7 +3917,15 @@ const TradeDetail = (
 
 
 
-  function Header() {
+  function Header(
+    {
+      lang,
+      chain,
+    }: {
+      lang: string,
+      chain: string,
+    }
+  ) {
 
     const router = useRouter();
   
@@ -3933,7 +3944,7 @@ const TradeDetail = (
           <button
             onClick={() => {
               router.push(
-                "/"
+                "/" + lang + "/" + chain
               );
             }}
           >

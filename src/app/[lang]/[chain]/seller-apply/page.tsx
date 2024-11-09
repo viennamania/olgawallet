@@ -591,7 +591,7 @@ export default function SettingsPage({ params }: any) {
 
     const [otp, setOtp] = useState('');
 
-    const [verifiedOtp, setVerifiedOtp] = useState(false);
+    const [verifiedOtp, setVerifiedOtp] = useState(true);
   
     const [isSendedOtp, setIsSendedOtp] = useState(false);
   
@@ -685,7 +685,10 @@ export default function SettingsPage({ params }: any) {
 
                 <AppBarComponent />
 
-                <Header />
+                <Header
+                    lang={params.lang}
+                    chain={params.chain}
+                />
         
 
 
@@ -1060,6 +1063,7 @@ export default function SettingsPage({ params }: any) {
 
                                 {/* otp verification */}
 
+                                {/*
                                 {verifiedOtp ? (
                                     <div className="w-full flex flex-row gap-2 items-center justify-center">
                                     <Image
@@ -1126,6 +1130,7 @@ export default function SettingsPage({ params }: any) {
                                     </div>
 
                                 )}
+                                */}
 
 
 
@@ -1232,7 +1237,15 @@ export default function SettingsPage({ params }: any) {
 
           
 
-function Header() {
+function Header(
+    {
+      lang,
+      chain,
+    }: {
+      lang: string;
+      chain: string;
+    }
+) {
 
     const router = useRouter();
   
@@ -1251,7 +1264,7 @@ function Header() {
           <button
             onClick={() => {
               router.push(
-                "/"
+                "/" + lang + "/" + chain
               );
             }}
           >

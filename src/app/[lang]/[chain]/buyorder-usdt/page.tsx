@@ -1354,7 +1354,10 @@ export default function Index({ params }: any) {
 
           <AppBarComponent />
 
-          <Header />
+          <Header
+            lang={params.lang}
+            chain={params.chain}
+          />
 
 
           <div className="flex flex-col items-start justify-center space-y-4">
@@ -3283,7 +3286,15 @@ const TradeDetail = (
   };
 
 
-  function Header() {
+  function Header(
+    {
+      lang,
+      chain,
+    }: {
+      lang: string,
+      chain: string,
+    }
+  ) {
 
     const router = useRouter();
   
