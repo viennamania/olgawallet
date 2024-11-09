@@ -815,9 +815,9 @@ export default function Index({ params }: any) {
                           
                           appMetadata={
                             {
-                              logoUrl: "https://gold.goodtether.com/logo.png",
+                              logoUrl: "https://wallet.olgaai.io/logo.png",
                               name: "Next App",
-                              url: "https://gold.goodtether.com",
+                              url: "https://wallet.olgaai.io",
                               description: "This is a Next App.",
 
                             }
@@ -858,9 +858,9 @@ export default function Index({ params }: any) {
 
                             appMetadata={
                               {
-                                logoUrl: "https://gold.goodtether.com/logo.png",
+                                logoUrl: "https://wallet.olgaai.io/logo.png",
                                 name: "Next App",
-                                url: "https://gold.goodtether.com",
+                                url: "https://wallet.olgaai.io",
                                 description: "This is a Next App.",
 
                               }
@@ -1979,7 +1979,7 @@ export default function Index({ params }: any) {
                                       ////router.push(`/sell-usdt/${item._id}`);
 
                                       // copy to clipboard
-                                      navigator.clipboard.writeText(`https://gold.goodtether.com/${params.lang}/sell-usdt/${item._id}`);
+                                      navigator.clipboard.writeText(`https://wallet.olgaai.io/${params.lang}/sell-usdt/${item._id}`);
                                       toast.success('Link has been copied to clipboard');
 
                                     }}

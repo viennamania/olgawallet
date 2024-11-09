@@ -1151,9 +1151,9 @@ export default function AIPage({ params }: any) {
 
                         appMetadata={
                             {
-                            logoUrl: "https://gold.goodtether.com/logo.png",
+                            logoUrl: "https://wallet.olgaai.io/logo.png",
                             name: "Next App",
-                            url: "https://gold.goodtether.com",
+                            url: "https://wallet.olgaai.io",
                             description: "This is a Next App.",
 
                             }

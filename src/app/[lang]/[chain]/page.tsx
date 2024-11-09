@@ -184,8 +184,8 @@ export default function Index({ params }: any) {
       appMetadata: {
         name: "GoodTether",
         description: "GoodTether",
-        url: "https://gold.goodtether.com",
-        //icons: ["https://gold.goodtether.com/logo.png"],
+        url: "https://wallet.olgaai.io",
+        //icons: ["https://wallet.olgaai.io/logo.png"],
       },
       */
 
@@ -288,6 +288,8 @@ export default function Index({ params }: any) {
     Connect_Wallet: "",
     Disconnect_Wallet: "",
 
+    Are_you_sure_you_want_to_disconnect_your_wallet: "",
+
   } );
 
   useEffect(() => {
@@ -333,6 +335,8 @@ export default function Index({ params }: any) {
 
     Connect_Wallet,
     Disconnect_Wallet,
+
+    Are_you_sure_you_want_to_disconnect_your_wallet,
 
   } = data;
 
@@ -1095,9 +1099,9 @@ export default function Index({ params }: any) {
 
                 appMetadata={
                   {
-                    logoUrl: "https://gold.goodtether.com/logo.png",
+                    logoUrl: "https://wallet.olgaai.io/logo.png",
                     name: "Next App",
-                    url: "https://gold.goodtether.com",
+                    url: "https://wallet.olgaai.io",
                     description: "This is a Next App.",
 
                   }
@@ -1121,6 +1125,7 @@ export default function Index({ params }: any) {
               {/* disconnect button */}
               <button
                 onClick={() => {
+                  confirm(Are_you_sure_you_want_to_disconnect_your_wallet) &&
                   activeWallet?.disconnect();
                 }}
                 className="bg-zinc-800 text-white p-2 rounded-lg"
@@ -1948,9 +1953,9 @@ export default function Index({ params }: any) {
                       
                       appMetadata={
                         {
-                          logoUrl: "https://gold.goodtether.com/logo.png",
+                          logoUrl: "https://wallet.olgaai.io/logo.png",
                           name: "Next App",
-                          url: "https://gold.goodtether.com",
+                          url: "https://wallet.olgaai.io",
                           description: "This is a Next App.",
 
                         }

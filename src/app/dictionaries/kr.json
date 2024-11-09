@@ -164,6 +164,9 @@
     "Connect_Wallet": "지갑 연결",
     "Disconnect_Wallet": "지갑 연결 해제",
 
+    "Are_you_sure_you_want_to_disconnect_your_wallet": "지갑 연결을 해제하시겠습니까?",
+
+
      "Order_has_been_placed": "주문이 완료되었습니다.",
 
 
@@ -352,7 +355,9 @@
 
     "Copy_Wallet_Address": "지갑 주소 복사하기",
 
-    "Are_you_sure_you_want_to_send_token": "토큰을 전송하시겠습니까?"
+    "Are_you_sure_you_want_to_send_token": "토큰을 전송하시겠습니까?",
+
+    "Fetch_Buy_Order": "구매신청 접수"
 
 
 }

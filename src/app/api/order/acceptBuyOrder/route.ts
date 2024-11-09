@@ -93,11 +93,11 @@ export async function POST(request: NextRequest) {
       let msgBody2 = '';
 
       if (lang === 'en') { 
-        msgBody2 = `[OLGA] TID[${tradeId}] Check the trade: https://gold.goodtether.com/${lang}/${chain}/sell-usdt/${orderId}`;
+        msgBody2 = `[OLGA] TID[${tradeId}] Check the trade: https://wallet.olgaai.io/${lang}/${chain}/sell-usdt/${orderId}`;
       } else if (lang === 'kr') {
-        msgBody2 = `[OLGA] TID[${tradeId}] 거래 확인: https://gold.goodtether.com/${lang}/${chain}/sell-usdt/${orderId}`;
+        msgBody2 = `[OLGA] TID[${tradeId}] 거래 확인: https://wallet.olgaai.io/${lang}/${chain}/sell-usdt/${orderId}`;
       } else {
-        msgBody2 = `[OLGA] TID[${tradeId}] Check the trade: https://gold.goodtether.com/${lang}/${chain}/sell-usdt/${orderId}`;
+        msgBody2 = `[OLGA] TID[${tradeId}] Check the trade: https://wallet.olgaai.io/${lang}/${chain}/sell-usdt/${orderId}`;
       }
 
 

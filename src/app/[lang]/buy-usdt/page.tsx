@@ -392,7 +392,7 @@ export default function Index({ params }: any) {
         body: JSON.stringify({
           name: tradeId,
           channel_url: orderId,
-          cover_url: 'https://gold.goodtether.com/icon-trade.png',
+          cover_url: 'https://wallet.olgaai.io/icon-trade.png',
           custom_type: 'trade',
 
         }),
@@ -775,9 +775,9 @@ export default function Index({ params }: any) {
                             
                             appMetadata={
                             {
-                                logoUrl: "https://gold.goodtether.com/logo.png",
+                                logoUrl: "https://wallet.olgaai.io/logo.png",
                                 name: "Next App",
-                                url: "https://gold.goodtether.com",
+                                url: "https://wallet.olgaai.io",
                                 description: "This is a Next App.",
 
                             }
@@ -1036,7 +1036,7 @@ export default function Index({ params }: any) {
                                     className="text-sm bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
                                     onClick={() => {
 
-                                      window.open(`https://gold.goodtether.com/${params.lang}/sell-usdt/${item._id}`, '_blank');
+                                      window.open(`https://wallet.olgaai.io/${params.lang}/sell-usdt/${item._id}`, '_blank');
 
                                     }}
                                   >
@@ -1136,7 +1136,7 @@ export default function Index({ params }: any) {
                                     className="ml-5 text-sm bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
                                     onClick={() => {
 
-                                      window.open(`https://gold.goodtether.com/${params.lang}/sell-usdt/${item._id}`, '_blank');
+                                      window.open(`https://wallet.olgaai.io/${params.lang}/sell-usdt/${item._id}`, '_blank');
 
                                     }}
                                   >

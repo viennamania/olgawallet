@@ -294,6 +294,8 @@ export default function Index({ params }: any) {
 
     Copied_Wallet_Address: "",
 
+    Fetch_Buy_Order: "",
+
 
   } );
 
@@ -411,6 +413,8 @@ export default function Index({ params }: any) {
     Escrow_balance_is_less_than_payment_amount,
 
     Copied_Wallet_Address,
+
+    Fetch_Buy_Order,
 
   } = data;
 
@@ -1869,7 +1873,7 @@ export default function Index({ params }: any) {
                   />
 
                   <div className="text-2xl font-semibold">
-                    USDT 구매 접수
+                    USDT {Fetch_Buy_Order}
                   </div>
 
               </div>
@@ -1945,9 +1949,9 @@ export default function Index({ params }: any) {
 
                         appMetadata={
                           {
-                            logoUrl: "https://gold.goodtether.com/logo.png",
+                            logoUrl: "https://wallet.olgaai.io/logo.png",
                             name: "Next App",
-                            url: "https://gold.goodtether.com",
+                            url: "https://wallet.olgaai.io",
                             description: "This is a Next App.",
 
                           }
@@ -2971,7 +2975,7 @@ export default function Index({ params }: any) {
                                       className="text-sm bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
                                       onClick={() => {
 
-                                        window.open(`https://gold.goodtether.com/${params.lang}/sell-usdt/${item._id}`, '_blank');
+                                        window.open(`https://wallet.olgaai.io/${params.lang}/sell-usdt/${item._id}`, '_blank');
 
                                       }}
                                     >
@@ -3107,11 +3111,11 @@ export default function Index({ params }: any) {
                                       className="ml-5 text-sm bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600"
                                       onClick={() => {
 
-                                        //window.open(`https://gold.goodtether.com/${params.lang}/${params.chain}/sell-usdt/${item._id}`, '_blank');
+                                        //window.open(`https://wallet.olgaai.io/${params.lang}/${params.chain}/sell-usdt/${item._id}`, '_blank');
 
                                         // copy to clipboard
 
-                                        navigator.clipboard.writeText(`https://gold.goodtether.com/${params.lang}/${params.chain}/sell-usdt/${item._id}`);
+                                        navigator.clipboard.writeText(`https://wallet.olgaai.io/${params.lang}/${params.chain}/sell-usdt/${item._id}`);
 
                                         toast.success('Link copied to clipboard');
 

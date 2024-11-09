@@ -196,6 +196,8 @@
     "Connect_Wallet": "Connect Wallet",
     "Disconnect_Wallet": "Disconnect Wallet",
 
+    "Are_you_sure_you_want_to_disconnect_your_wallet": "Are you sure you want to disconnect your wallet?",
+
 
     "Order_has_been_placed": "Order has been placed",
 
@@ -404,7 +406,10 @@
     
     "Copy_Wallet_Address": "Copy Wallet Address",
 
-    "Are_you_sure_you_want_to_send_token": "Are you sure you want to send token?"
+    "Are_you_sure_you_want_to_send_token": "Are you sure you want to send token?",
+
+    "Fetch_Buy_Order": "Fetch Buy Order"
+
 
 
 

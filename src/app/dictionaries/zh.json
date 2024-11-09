@@ -122,6 +122,8 @@
     "seconds_ago": "秒前",
     "Connect_Wallet": "连接钱包",
     "Disconnect_Wallet": "断开钱包",
+    "Are_you_sure_you_want_to_disconnect_your_wallet": "您确定要断开钱包吗？",
+
     "Order_has_been_placed": "订单已下单",
     "Placing_Order": "下单中",
     "My_Order": "我的订单",
@@ -232,7 +234,9 @@
 
     "Copy_Wallet_Address": "复制钱包地址",
 
-    "Are_you_sure_you_want_to_send_token": "您确定要发送代币吗？"
+    "Are_you_sure_you_want_to_send_token": "您确定要发送代币吗？",
+
+    "Fetch_Buy_Order": "获取购买订单"
 
    
 }
