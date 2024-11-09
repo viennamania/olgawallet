@@ -384,8 +384,6 @@ export default function SendUsdt({ params }: any) {
       walletAddress: '',
       createdAt: '',
       settlementAmountOfFee: '',
-      tronWalletAddress: '',
-      tronWalletPrivateKey: '',
     }
   );
 
@@ -492,7 +490,6 @@ export default function SendUsdt({ params }: any) {
     avatar: '',
     mobile: '',
     walletAddress: '',
-    tronWalletAddress: '',
     createdAt: '',
     settlementAmountOfFee: '',
   });
@@ -600,15 +597,8 @@ export default function SendUsdt({ params }: any) {
       return;
     }
 
-    // check chain
-    // if chain is tron, send TRC20 USDT
 
-    if (params.chain === "tron" && !recipient.tronWalletAddress) {
-      toast.error('Please enter a valid address');
-      return;
-    }
-
-    if (params.chain !== "tron" && !recipient.walletAddress) {
+    if (!recipient.walletAddress) {
       toast.error('Please enter a valid address');
       return;
     }
@@ -632,81 +622,69 @@ export default function SendUsdt({ params }: any) {
 
     try {
 
+      // send USDT
+      // Call the extension function to prepare the transaction
+      const transaction = transfer({
+          //contract,
 
-      if (params.chain === "tron") {
+          contract: contract,
+
+          to: recipient.walletAddress,
+          amount: amount,
+      });
+      
+
+      const { transactionHash } = await sendTransaction({
+        
+        account: activeAccount as any,
+
+        transaction,
+      });
+
+      
+      if (transactionHash) {
+
+
+        await fetch('/api/transaction/setTransfer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            lang: params.lang,
+            chain: params.chain,
+            walletAddress: address,
+            amount: amount,
+            toWalletAddress: recipient.walletAddress,
+          }),
+        });
 
 
 
+        toast.success(USDT_sent_successfully);
+
+        setAmount(0); // reset amount
+
+        // refresh balance
+
+        // get the balance
+
+        const result = await balanceOf({
+          contract,
+          address: address || "",
+        });
+
+        //console.log(result);
+
+        setBalance( Number(result) / 10 ** 6 );
 
       } else {
 
-
-
-        // send USDT
-        // Call the extension function to prepare the transaction
-        const transaction = transfer({
-            //contract,
-
-            contract: contract,
-
-            to: recipient.walletAddress,
-            amount: amount,
-        });
-        
-
-        const { transactionHash } = await sendTransaction({
-          
-          account: activeAccount as any,
-
-          transaction,
-        });
-
-        
-        if (transactionHash) {
-
-
-          await fetch('/api/transaction/setTransfer', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              lang: params.lang,
-              chain: params.chain,
-              walletAddress: address,
-              amount: amount,
-              toWalletAddress: recipient.walletAddress,
-            }),
-          });
-
-
-
-          toast.success(USDT_sent_successfully);
-
-          setAmount(0); // reset amount
-
-          // refresh balance
-
-          // get the balance
-
-          const result = await balanceOf({
-            contract,
-            address: address || "",
-          });
-
-          //console.log(result);
-
-          setBalance( Number(result) / 10 ** 6 );
-
-        } else {
-
-          toast.error(Failed_to_send_USDT);
-
-        }
+        toast.error(Failed_to_send_USDT);
 
       }
 
-      
+ 
 
 
     } catch (error) {
@@ -847,7 +825,6 @@ export default function SendUsdt({ params }: any) {
             avatar: '',
             mobile: '',
             walletAddress: recipient?.walletAddress,
-            tronWalletAddress: recipient?.walletAddress,
             createdAt: '',
             settlementAmountOfFee: '',
 
@@ -858,7 +835,7 @@ export default function SendUsdt({ params }: any) {
 
     });
 
-  } , [recipient?.walletAddress, recipient?.walletAddress]);
+  } , [recipient?.walletAddress]);
 
   
 
@@ -866,74 +843,6 @@ export default function SendUsdt({ params }: any) {
   
 
 
-
-
-  // getTronBalance
-  /*
-  const [tronBalance, setTronBalance] = useState(0);
-  useEffect(() => {
-    if (tronWalletAddress && params.chain === "tron") {
-      const getTronBalance = async () => {
-        const response = await fetch('/api/tron/getTronBalance', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            lang: params.lang,
-            chain: params.chain,
-            tronWalletAddress: tronWalletAddress,
-          }),
-        });
-
-        if (!response) return;
-
-        const data = await response.json();
-
-        setTronBalance(data.result.tronBalance);
-
-      };
-
-      getTronBalance();
-
-    }
-
-  } , [tronWalletAddress, params.chain, params.lang]);
-  */
-
-
-
-
-  // usdt balance
-  const [usdtBalance, setUsdtBalance] = useState(0);
-  useEffect(() => {
-    if (tronWalletAddress && params.chain === "tron") {
-      const getUsdtBalance = async () => {
-        const response = await fetch('/api/tron/getUsdtBalance', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            lang: params.lang,
-            chain: params.chain,
-            tronWalletAddress: tronWalletAddress,
-          }),
-        });
-
-        if (!response) return;
-
-        const data = await response.json();
-
-        setUsdtBalance(data.result?.usdtBalance);
-
-      };
-
-      getUsdtBalance();
-
-    }
-
-  } , [tronWalletAddress, params.chain, params.lang]);
 
 
 
@@ -1155,30 +1064,6 @@ export default function SendUsdt({ params }: any) {
                     </div>
 
                   )*/}
-
-
-                  {/* tron wallet address */}
-                  {tronWalletAddress && params.chain === "tron" && (
-                    <div className="flex flex-row items-center gap-2">
-                      <div className="text-sm">
-                        {My_Wallet_Address}
-                      </div>
-                      <div className="text-lg font-semibold text-gray-800">
-                        <button
-                          className="text-sm text-zinc-400 underline"
-                          onClick={() => {
-                            navigator.clipboard.writeText(tronWalletAddress);
-                            toast.success('Copied wallet address');
-                          } }
-                        >
-                          {tronWalletAddress.substring(0, 6)}...{tronWalletAddress.substring(tronWalletAddress.length - 4)}
-                        </button>
-
-
-                      </div>
-                    </div>
-                  )}
-
 
 
 
