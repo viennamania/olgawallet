@@ -918,6 +918,7 @@ export default function SendUsdt({ params }: any) {
             </div>
 
             {/* goto buy usdt page */}
+            {/*
             <div className="text-sm font-semibold text-zinc-100 mt-2 w-full text-right">
   
               <a
@@ -932,6 +933,7 @@ export default function SendUsdt({ params }: any) {
                 {token} 구매하러 가기
               </a>
             </div>
+            */}
 
 
           
@@ -1439,6 +1441,7 @@ export default function SendUsdt({ params }: any) {
 
 
             {/* transaction history table */}
+            {/*
             <div className="w-full flex flex-col gap-5 items-start justify-start
               border border-gray-300 rounded-lg p-4
             ">
@@ -1474,12 +1477,12 @@ export default function SendUsdt({ params }: any) {
                 </tbody>
               </table>
 
-              {/* pagination */}
               <div className="w-full flex flex-row gap-2 items-center justify-center">
                 <button className="p-2 rounded-lg bg-gray-300 text-gray-400">Prev</button>
                 <button className="p-2 rounded-lg bg-gray-300 text-gray-400">Next</button>
               </div>
             </div>
+            */}
 
 
 

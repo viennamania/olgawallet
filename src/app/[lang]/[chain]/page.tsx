@@ -460,13 +460,13 @@ export default function Index({ params }: any) {
     if (address) getBalance();
 
     // get the balance in the interval
-
+    /*
     const interval = setInterval(() => {
       if (address) getBalance();
     }, 1000);
 
-
     return () => clearInterval(interval);
+    */
 
   } , [address, contract]);
 
@@ -503,13 +503,13 @@ export default function Index({ params }: any) {
       if (address) getBalance();
 
       // get the balance in the interval
-
+      /*
       const interval = setInterval(() => {
         if (address) getBalance();
       }, 1000);
 
-
       return () => clearInterval(interval);
+      */
 
   } , [address, contractOPW]);
 
@@ -608,6 +608,7 @@ export default function Index({ params }: any) {
 
   const [seller, setSeller] = useState(null) as any;
 
+  const [user, setUser] = useState(null) as any;
 
   const [loadingUser, setLoadingUser] = useState(true);
 
@@ -632,10 +633,13 @@ export default function Index({ params }: any) {
 
           const data = await response.json();
 
-          ////console.log("getUser data.result", data.result);
+          ///console.log("getUser data.result", data.result);
 
 
           if (data.result) {
+
+              setUser(data.result);
+
               setNickname(data.result.nickname);
               data.result.avatar && setAvatar(data.result.avatar);
               setUserCode(data.result.id);
@@ -881,12 +885,13 @@ export default function Index({ params }: any) {
     fetchSellOrders();
 
     // fetch sell orders every 10 seconds
-    
+    /*
     const interval = setInterval(() => {
       fetchSellOrders();
     }, 3000);
 
     return () => clearInterval(interval);
+    */
     
 
   }, [params.lang, params.chain]);
@@ -1202,28 +1207,114 @@ export default function Index({ params }: any) {
 
                 ) : (
 
-                  <div className="mt-4 flex flex-row gap-2 justify-center items-center">
-                    <h2 className="text-3xl font-semibold text-zinc-100">
-                      {nickname}
-                    </h2>
-                    {userCode && (
-                      <Image
-                        src="/verified.png"
-                        alt="Verified"
-                        width={20}
-                        height={20}
-                        className="rounded-lg"
-                      />
-                    )}
-                    {seller && (
-                      <Image
-                        src="/best-seller.png"
-                        alt="Best Seller"
-                        width={20}
-                        height={20}
-                        className="rounded-lg"
-                      />
-                    )}
+
+                  <div className="mt-4 flex flex-col gap-2 justify-center items-center">
+
+                    <div className="flex flex-row gap-2 justify-center items-center">
+                      <h2 className="text-3xl font-semibold text-zinc-100">
+                        {nickname}
+                      </h2>
+                      {userCode && (
+                        <Image
+                          src="/verified.png"
+                          alt="Verified"
+                          width={20}
+                          height={20}
+                          className="rounded-lg"
+                        />
+                      )}
+                      {seller && (
+                        <Image
+                          src="/best-seller.png"
+                          alt="Best Seller"
+                          width={20}
+                          height={20}
+                          className="rounded-lg"
+                        />
+                      )}
+                    </div>
+
+                    {/* qr code */}
+                    <div className="flex flex-col gap-5 justify-center items-center">
+
+                      {user?.sellerAliPay?.qrcodeImage && (
+                        <div className="flex flex-col gap-2 justify-center items-center">
+                          <span className="text-sm text-zinc-300">
+                            Alipay QR Code
+                          </span>
+                          <Image
+                            src={user ? user?.sellerAliPay?.qrcodeImage : "/qrcode.png"}
+                            alt="QR Code"
+                            width={200}
+                            height={200}
+                            className="rounded-lg w-full h-56"
+                          />
+                        </div>
+                      )}
+
+                      {user?.sellerWechatPay?.qrcodeImage && (
+                        <div className="flex flex-col gap-2 justify-center items-center">
+                          <span className="text-sm text-zinc-300">
+                            Wechat Pay QR Code
+                          </span>
+                          <Image
+                            src={user ? user?.sellerWechatPay?.qrcodeImage : "/qrcode.png"}
+                            alt="QR Code"
+                            width={200}
+                            height={200}
+                            className="rounded-lg w-full h-56"
+                          />
+                        </div>
+                      )}
+
+                      {user?.sellerUnionPay?.qrcodeImage && (
+                        <div className="flex flex-col gap-2 justify-center items-center">
+                          <span className="text-sm text-zinc-300">
+                            Union Pay QR Code
+                          </span>
+                          <Image
+                            src={user ? user?.sellerUnionPay?.qrcodeImage : "/qrcode.png"}
+                            alt="QR Code"
+                            width={200}
+                            height={200}
+                            className="rounded-lg w-full h-56"
+                          />
+                        </div>
+                      )}
+
+                      {user?.sellerJdPay?.qrcodeImage && (
+                        <div className="flex flex-col gap-2 justify-center items-center">
+                          <span className="text-sm text-zinc-300">
+                            JD Pay QR Code
+                          </span>
+                          <Image
+                            src={user ? user?.sellerJdPay?.qrcodeImage : "/qrcode.png"}
+                            alt="QR Code"
+                            width={200}
+                            height={200}
+                            className="rounded-lg w-full h-56"
+                          />
+                        </div>
+                      )}
+
+                      {user?.sellerNavPay?.qrcodeImage && (
+                        <div className="flex flex-col gap-2 justify-center items-center">
+                          <span className="text-sm text-zinc-300">
+                            Nav Pay QR Code
+                          </span>
+                          <Image
+                            src={user ? user?.sellerNavPay?.qrcodeImage : "/qrcode.png"}
+                            alt="QR Code"
+                            width={200}
+                            height={200}
+                            className="rounded-lg w-full h-56"
+                          />
+                        </div>
+                      )}
+
+                    </div>
+
+
                   </div>
 
                 )}
